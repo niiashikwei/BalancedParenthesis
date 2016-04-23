@@ -1,11 +1,9 @@
 import org.junit.Test;
 
+import static junit.framework.Assert.assertEquals;
 import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-/**
- * Created by user on 4/17/16.
- */
 public class ParenthesisTest {
     @Test
     public void shouldReturnTrueForLeftParenthesisOfSameType(){
@@ -54,5 +52,13 @@ public class ParenthesisTest {
         Parenthesis parenthesis = new Parenthesis('{', '}');
         boolean result = parenthesis.isSameType('(');
         assertFalse(result);
+    }
+
+    @Test
+    public void shouldBeEqualToAnotherInstanceWithSameLeftAndRightBraces(){
+        Parenthesis parenthesisOne = new Parenthesis('{', '}');
+        Parenthesis parenthesisTwo = new Parenthesis('{', '}');
+
+        assertEquals(parenthesisOne, parenthesisTwo);
     }
 }
