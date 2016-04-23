@@ -2,9 +2,11 @@ import java.util.Stack;
 
 public class Checker {
 
-    private static final char OPENING_PARENTHESIS = '(';
-    private static final char CLOSING_PARENTHESIS = ')';
-
+    private static final Parenthesis[] PARENTHESIS_STORE = {
+            new Parenthesis('(', ')'),
+            new Parenthesis('[', ']'),
+            new Parenthesis('{', '}')
+    };
 
     public Checker(){
 
@@ -20,14 +22,22 @@ public class Checker {
         char[] charInput = input.toCharArray();
 
         for (char c : charInput){
-            if (isOpeningSymbol(c)){
+            Parenthesis parenthesis;
+            try {
+                parenthesis = getParenthesisForChar(c);
+            } catch (Exception e) {
+                e.printStackTrace();
+                return false;
+            }
+
+            if (parenthesis.isLeft(c)){
                 stackOfInput.add(c);
                 continue;
             }
 
-            if (isClosingSymbol(c) && !stackOfInput.isEmpty()){
+            if (parenthesis.isRight(c) && !stackOfInput.isEmpty()){
                 Character peek = stackOfInput.peek();
-                if (isOpeningSymbol(peek)){
+                if (parenthesis.isLeft(peek)){
                     stackOfInput.pop();
                 }else{
                     return false;
@@ -39,12 +49,13 @@ public class Checker {
         return stackOfInput.isEmpty();
     }
 
-    private boolean isClosingSymbol(char c) {
-        return c == CLOSING_PARENTHESIS;
-    }
+    private Parenthesis getParenthesisForChar(char c) throws Exception {
+        for (Parenthesis parenthesis : PARENTHESIS_STORE){
+            if(parenthesis.isSameType(c)){
+                return parenthesis;
+            }
+        }
 
-    private boolean isOpeningSymbol(char c) {
-        return c == OPENING_PARENTHESIS;
+        throw new Exception("Parenthesis not found for char -> " + c);
     }
-
 }

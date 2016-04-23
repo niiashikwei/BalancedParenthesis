@@ -43,5 +43,11 @@ public class CheckerTest {
         assertThat(checker.checkBalanced(input), is(true));
     }
 
+    @Test
+    public void shouldReturnTrueForBalancedCurlyBraces(){
+        Checker checker = new Checker();
+        String input = "{}";
+        assertThat(checker.checkBalanced(input), is(true));
+    }
 
 }
