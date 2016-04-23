@@ -12,7 +12,7 @@ public class CheckerTest {
 
     @Before
     public void setup(){
-        checker = new Checker(new ParenthesisConfiguration());
+        checker = new Checker(new DefaultParenthesisConfiguration());
     }
 
     @Test

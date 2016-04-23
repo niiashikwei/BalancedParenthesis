@@ -1,10 +1,10 @@
 import java.util.Stack;
 
 public class Checker {
-    private ParenthesisConfiguration parenthesisConfiguration;
+    private DefaultParenthesisConfiguration defaultParenthesisConfiguration;
 
-    public Checker(ParenthesisConfiguration parenthesisConfiguration){
-        this.parenthesisConfiguration = parenthesisConfiguration;
+    public Checker(DefaultParenthesisConfiguration defaultParenthesisConfiguration){
+        this.defaultParenthesisConfiguration = defaultParenthesisConfiguration;
     }
 
     public boolean checkBalanced(String input) {
@@ -20,7 +20,7 @@ public class Checker {
             //if invalid character then doesn't match, return false
             Parenthesis parenthesis;
             try {
-                parenthesis = parenthesisConfiguration.getParenthesisForChar(c);
+                parenthesis = defaultParenthesisConfiguration.getParenthesisForChar(c);
             } catch (Exception e) {
                 e.printStackTrace();
                 return false;
